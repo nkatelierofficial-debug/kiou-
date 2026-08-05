@@ -40,7 +40,13 @@ KIOU_WEB/
 ├── package.json         # Project Dependencies
 └── vite.config.js       # Vite Configuration
 
-git clone [https://github.com/khandevlabs-commits/kiouwebsite.git](https://github.com/khandevlabs-commits/kiouwebsite.git)
+## ⚙️ Local Setup & Installation
+
+Follow these steps to run the project locally on your machine:
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/nkatelierofficial-debug/kiou-.git](https://github.com/nkatelierofficial-debug/kiou-.git)
 cd KIOU_WEB
 
 npm install
