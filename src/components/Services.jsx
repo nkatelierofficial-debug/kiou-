@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 export default function Services() {
   const [selectedModal, setSelectedModal] = useState(null);
   const courses = [
+    // --- 2 Years Programs ---
     {
-      title: " Advance Ultrasound Diploma (Advanced)",
+      title: "Advance Ultrasound Diploma (Advanced)",
       duration: "2 Years",
       desc: "Comprehensive 2-year diploma covering basic to advanced diagnostic ultrasound applications."
     },
@@ -23,11 +24,20 @@ export default function Services() {
       duration: "2 Years",
       desc: "Advanced clinical dermatology and cosmetic treatment methodology."
     },
+    
+    // --- 1 Year Programs ---
     {
       title: "Basic Ultrasound Diploma",
       duration: "1 Year",
       desc: "Comprehensive introductory diploma designed for medical graduates."
     },
+    {
+      title: "Echocardiography (ECHO)",
+      duration: "1 Year",
+      desc: "Focused 1-year training program covering essential cardiac imaging, 2D echo, and color flow mapping."
+    },
+
+    // --- Short Courses ---
     {
       title: "Vascular Doppler Course",
       duration: "30 Days",
@@ -44,6 +54,7 @@ export default function Services() {
       desc: "Intensive practical module covering endovaginal diagnostic scanning."
     }
   ];
+
   const medicalServices = [
     {
       title: "Pelvic Ultrasound (Gynecology & Obstetrics)",
@@ -143,16 +154,6 @@ export default function Services() {
         "Performed using single-use, 100% sterile disposable cups.",
         "Targeted relief for chronic muscle tension and joint pain.",
         "Promotes blood circulation and natural body detox."
-      ]
-    },
-    {
-      title: "Homeopathic Consultation & Treatment",
-      category: "Alternative Care",
-      desc: "Holistic, natural medical consultations for chronic and recurring health conditions.",
-      details: [
-        "Customized natural remedies for skin allergies and metabolic issues.",
-        "Long-term management for digestive and respiratory disorders.",
-        "Gentle, side-effect-free alternative treatment plans."
       ]
     }
   ];

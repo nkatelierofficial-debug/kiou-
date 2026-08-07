@@ -1,9 +1,6 @@
-/* Smooth Scrolling for Single Page Application */
 html {
   scroll-behavior: smooth;
 }
-
-/* Smooth transition for buttons */
 .btn {
   transition: all 0.3s ease-in-out !important;
 }
@@ -11,8 +8,6 @@ html {
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
-
-/* Smooth hover effects for cards */
 .card, .border {
   transition: all 0.3s ease-in-out !important;
 }
@@ -20,16 +15,12 @@ html {
   transform: translateY(-4px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
 }
-
-/* Navbar links smooth color transition */
 .navbar-nav .nav-link {
   transition: color 0.2s ease-in-out;
 }
 .navbar-nav .nav-link:hover {
   color: #0d6efd !important;
 }
-
-/* Footer links smooth transition */
 footer a {
   transition: color 0.2s ease-in-out;
 }

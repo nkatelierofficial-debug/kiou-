@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Founder from './components/Founder';
@@ -8,11 +10,11 @@ import Services from './components/Services';
 import ClinicalTraining from './components/ClinicalTraining';
 import Gallery from './components/Gallery';
 import FAQs from './components/FAQs';
-import Contact from './components/Contact';
+import Contact from './components/Contact'; 
 import Footer from './components/Footer';
 import WhatsAppWidget from './components/WhatsAppWidget';
 
-export default function App() {
+function HomePage() {
   return (
     <>
       <Navbar />
@@ -24,9 +26,19 @@ export default function App() {
       <ClinicalTraining />
       <Gallery />
       <FAQs />
-      <Contact />
       <Footer />
       <WhatsAppWidget />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
   );
 }
