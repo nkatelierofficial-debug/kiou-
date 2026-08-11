@@ -6,10 +6,9 @@ import drNosheenImg from '../assets/images/dr nosheen.jpg';
 import drNimraImg from '../assets/images/miss nimra.jpg';
 
 export default function Faculty() {
-  // Faculty data list
   const facultyMembers = [
     { 
-      name: "Dr. Abida Batool MBBS, MUSP (PAC)", 
+      name: "Dr. Abida Batool MBBS, MUSP (PAC) , ARDMS ", 
       role: "Instructor", 
       qualification: "Gynecologist / Sonologist",
       img: drAbidaImg 
@@ -17,13 +16,13 @@ export default function Faculty() {
     { 
       name: "Dr. Amna Meer", 
       role: "Instructor", 
-      qualification: "Physiotherapist",
+      qualification: "Physiotherapist / DPT",
       img: drAmnaImg 
     },
     { 
       name: "Dr. Fatima Mehboob", 
       role: "Instructor", 
-      qualification: "Sonographer / Echo Cardiographer",
+      qualification: "Sonographer / Echo Cardiographer / Aesthetic Skin Care",
       img: drFatimaImg 
     },
     { 

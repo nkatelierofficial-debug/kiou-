@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 export default function Services() {
   const [selectedModal, setSelectedModal] = useState(null);
   const courses = [
-    // --- 2 Years Programs ---
     {
       title: "Advance Ultrasound Diploma (Advanced)",
       duration: "2 Years",
@@ -24,8 +23,6 @@ export default function Services() {
       duration: "2 Years",
       desc: "Advanced clinical dermatology and cosmetic treatment methodology."
     },
-    
-    // --- 1 Year Programs ---
     {
       title: "Basic Ultrasound Diploma",
       duration: "1 Year",
@@ -36,8 +33,6 @@ export default function Services() {
       duration: "1 Year",
       desc: "Focused 1-year training program covering essential cardiac imaging, 2D echo, and color flow mapping."
     },
-
-    // --- Short Courses ---
     {
       title: "Vascular Doppler Course",
       duration: "30 Days",
@@ -52,6 +47,11 @@ export default function Services() {
       title: "Transvaginal Ultrasound Course",
       duration: "10 Days",
       desc: "Intensive practical module covering endovaginal diagnostic scanning."
+    },
+     {
+      title: "Online Live Classes via Zoom",
+      duration: "Live",
+      desc: "Flexible live online sessions covering theoretical concepts and interactive case reviews."
     }
   ];
 

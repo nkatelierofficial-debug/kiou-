@@ -21,16 +21,16 @@ export default function Founder() {
           </div>
           <div className="col-lg-7">
             <div className="ps-lg-4">
-              <span className="text-uppercase fw-bold text-primary small d-block mb-2" style={{ letterSpacing: '1px' }}>
-                Managing Director Message
-              </span>
+               <span className="text-xl text-primary fw-bold small mb-4 text-uppercase" style={{ letterSpacing: '0.5px' }}>
+                       Chief Executive Officer (CEO)
+                        </span>
               
               <h2 className="display-5 fw-bold text-dark mb-1">
                 Musarrat Jehan
               </h2>
               
               <p className="text-primary fw-bold small mb-4 text-uppercase" style={{ letterSpacing: '0.5px' }}>
-                Managing Director — Karachi Institute of Ultrasonography (KIOU)
+                CEO — Karachi Institute of Ultrasonography (KIOU)
               </p>
               
               <p className="text-dark fs-6 lh-lg mb-3">
