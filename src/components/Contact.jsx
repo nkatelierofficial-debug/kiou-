@@ -44,8 +44,15 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.agreeTerms) {
-      alert('Please accept Terms and Conditions.');
+
+    // Sirf tab check karega agar user ne type kiya ho, khali hone par submit hone dega
+    if (formData.cnic && formData.cnic.length !== 13) {
+      alert('Please enter a valid 13-digit CNIC number.');
+      return;
+    }
+
+    if (formData.phoneNo && formData.phoneNo.length !== 11) {
+      alert('Please enter a valid 11-digit Phone number.');
       return;
     }
 
@@ -59,22 +66,22 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
     `;
 
     const templateParams = {
-      from_name: formData.fullName,
-      father_name: formData.fatherName,
-      cnic: formData.cnic,
+      from_name: formData.fullName || 'N/A',
+      father_name: formData.fatherName || 'N/A',
+      cnic: formData.cnic || 'N/A',
       passport_no: formData.passportNo || 'N/A',
-      dob: formData.dob,
-      nationality: formData.nationality,
+      dob: formData.dob || 'N/A',
+      nationality: formData.nationality || 'N/A',
       gender: formData.gender,
       marital_status: formData.maritalStatus,
-      phone_no: formData.phoneNo,
+      phone_no: formData.phoneNo || 'N/A',
       alt_phone_no: formData.altPhoneNo || 'N/A',
-      whatsapp_no: formData.whatsappNo,
-      email: formData.email,
+      whatsapp_no: formData.whatsappNo || 'N/A',
+      email: formData.email || 'N/A',
       campus_branch: formData.branch,
-      address: formData.address,
-      course_name: formData.courseName,
-      duration: formData.programType,
+      address: formData.address || 'N/A',
+      course_name: formData.courseName || 'N/A',
+      duration: formData.programType || 'N/A',
       class_timing: formData.preferredTiming,
       education_summary: educationSummary
     };
@@ -99,8 +106,6 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
   return (
     <div className="bg-light py-5 min-vh-100">
       <div className="container py-4">
-        
-        {/* Back Button */}
         <div className="mb-4">
           <Link to="/" className="btn btn-outline-primary fw-semibold rounded-pill px-4">
             ← Back to Home Page
@@ -144,7 +149,7 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
           </div>
         </div>
 
-        {/* 2 Google Maps */}
+        {/* Maps */}
         <div className="row g-4 mb-5">
           <div className="col-lg-6">
             <div className="p-4 bg-white rounded-4 border shadow-sm h-100">
@@ -173,43 +178,53 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
           </div>
 
           <form onSubmit={handleSubmit}>
-            
-            {/* Candidate Information */}
             <h6 className="fw-bold text-primary mb-3 text-uppercase">Candidate Information</h6>
             <div className="row g-3 mb-4">
               <div className="col-md-6">
-                <label className="form-label small fw-semibold">Name *</label>
-                <input type="text" className="form-control" placeholder="Enter candidate's name" required value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} />
+                <label className="form-label small fw-semibold">Name</label>
+                <input type="text" className="form-control" placeholder="Enter candidate's name" value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} />
               </div>
               <div className="col-md-6">
-                <label className="form-label small fw-semibold">Father Name *</label>
-                <input type="text" className="form-control" placeholder="Enter father's name" required value={formData.fatherName} onChange={(e) => setFormData({...formData, fatherName: e.target.value})} />
+                <label className="form-label small fw-semibold">Father Name</label>
+                <input type="text" className="form-control" placeholder="Enter father's name" value={formData.fatherName} onChange={(e) => setFormData({...formData, fatherName: e.target.value})} />
               </div>
               <div className="col-md-6">
-                <label className="form-label small fw-semibold">CNIC No *</label>
-                <input type="text" className="form-control" placeholder="e.g. 42101-XXXXXXX-X" required value={formData.cnic} onChange={(e) => setFormData({...formData, cnic: e.target.value})} />
+                <label className="form-label small fw-semibold">CNIC No</label>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="e.g. 4210112345671" 
+                  value={formData.cnic} 
+                  onChange={(e) => {
+                    const onlyNums = e.target.value.replace(/\D/g, '');
+                    if (onlyNums.length <= 13) {
+                      setFormData({...formData, cnic: onlyNums});
+                    }
+                  }} 
+                />
               </div>
+
               <div className="col-md-6">
                 <label className="form-label small fw-semibold">Passport No (If Applicable)</label>
                 <input type="text" className="form-control" placeholder="Enter passport number" value={formData.passportNo} onChange={(e) => setFormData({...formData, passportNo: e.target.value})} />
               </div>
               <div className="col-md-4">
-                <label className="form-label small fw-semibold">Date of Birth *</label>
-                <input type="date" className="form-control" required value={formData.dob} onChange={(e) => setFormData({...formData, dob: e.target.value})} />
+                <label className="form-label small fw-semibold">Date of Birth</label>
+                <input type="date" className="form-control" value={formData.dob} onChange={(e) => setFormData({...formData, dob: e.target.value})} />
               </div>
               <div className="col-md-4">
-                <label className="form-label small fw-semibold">Nationality *</label>
-                <input type="text" className="form-control" required value={formData.nationality} onChange={(e) => setFormData({...formData, nationality: e.target.value})} />
+                <label className="form-label small fw-semibold">Nationality</label>
+                <input type="text" className="form-control" value={formData.nationality} onChange={(e) => setFormData({...formData, nationality: e.target.value})} />
               </div>
               <div className="col-md-4">
-                <label className="form-label small fw-semibold">Marital Status *</label>
+                <label className="form-label small fw-semibold">Marital Status</label>
                 <select className="form-select" value={formData.maritalStatus} onChange={(e) => setFormData({...formData, maritalStatus: e.target.value})}>
                   <option value="Single">Single</option>
                   <option value="Married">Married</option>
                 </select>
               </div>
               <div className="col-12">
-                <label className="form-label small fw-semibold d-block">Gender *</label>
+                <label className="form-label small fw-semibold d-block">Gender</label>
                 <div className="d-flex flex-wrap gap-4 mt-1">
                   <div className="form-check">
                     <input className="form-check-input" type="radio" name="genderOptions" id="genderMale" checked={formData.gender === 'Male'} onChange={() => setFormData({...formData, gender: 'Male'})} />
@@ -227,66 +242,100 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
               </div>
             </div>
 
-            {/* Contact Information */}
             <h6 className="fw-bold text-primary mb-3 text-uppercase">Contact Information</h6>
             <div className="row g-3 mb-4">
               <div className="col-md-4">
-                <label className="form-label small fw-semibold">Phone No *</label>
-                <input type="tel" className="form-control" placeholder="03XX-XXXXXXX" required value={formData.phoneNo} onChange={(e) => setFormData({...formData, phoneNo: e.target.value})} />
+                <label className="form-label small fw-semibold">Phone No</label>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="03XXXXXXXXX" 
+                  value={formData.phoneNo} 
+                  onChange={(e) => {
+                    const onlyNums = e.target.value.replace(/\D/g, '');
+                    if (onlyNums.length <= 11) {
+                      setFormData({...formData, phoneNo: onlyNums});
+                    }
+                  }} 
+                />
               </div>
               <div className="col-md-4">
-                <label className="form-label small fw-semibold">WhatsApp No *</label>
-                <input type="tel" className="form-control" placeholder="03XX-XXXXXXX" required value={formData.whatsappNo} onChange={(e) => setFormData({...formData, whatsappNo: e.target.value})} />
+                <label className="form-label small fw-semibold">WhatsApp No</label>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="03XXXXXXXXX" 
+                  value={formData.whatsappNo} 
+                  onChange={(e) => {
+                    const onlyNums = e.target.value.replace(/\D/g, '');
+                    if (onlyNums.length <= 11) {
+                      setFormData({...formData, whatsappNo: onlyNums});
+                    }
+                  }} 
+                />
               </div>
               <div className="col-md-4">
                 <label className="form-label small fw-semibold">Alternative No</label>
-                <input type="tel" className="form-control" placeholder="Optional" value={formData.altPhoneNo} onChange={(e) => setFormData({...formData, altPhoneNo: e.target.value})} />
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="Optional" 
+                  value={formData.altPhoneNo} 
+                  onChange={(e) => {
+                    const onlyNums = e.target.value.replace(/\D/g, '');
+                    if (onlyNums.length <= 11) {
+                      setFormData({...formData, altPhoneNo: onlyNums});
+                    }
+                  }} 
+                />
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label small fw-semibold">Email Address</label>
+                <input type="email" className="form-control" placeholder="name@example.com" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
               </div>
               <div className="col-md-6">
-                <label className="form-label small fw-semibold">Email Address *</label>
-                <input type="email" className="form-control" placeholder="name@example.com" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-              </div>
-              <div className="col-md-6">
-                <label className="form-label small fw-semibold">Select Campus Branch *</label>
+                <label className="form-label small fw-semibold">Select Campus Branch</label>
                 <select className="form-select" value={formData.branch} onChange={(e) => setFormData({...formData, branch: e.target.value})}>
                   <option value="Gulshan-e-Johar Branch">Gulshan-e-Johar Branch</option>
                   <option value="DHA Branch">DHA Branch (Phase 2 Ext)</option>
                 </select>
               </div>
               <div className="col-12">
-                <label className="form-label small fw-semibold">Address *</label>
-                <input type="text" className="form-control" placeholder="Enter full address" required value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} />
+                <label className="form-label small fw-semibold">Address</label>
+                <input type="text" className="form-control" placeholder="Enter full address" value={formData.address} onChange={(e) => setFormData({...formData, address: e.target.value})} />
               </div>
             </div>
 
-            {/* Course Information */}
             <h6 className="fw-bold text-primary mb-3 text-uppercase">Course Information</h6>
             <div className="row g-3 mb-4">
               <div className="col-md-6">
-                <label className="form-label small fw-semibold">Name of Course You Are Applying For *</label>
-                <select className="form-select" required value={formData.courseName} onChange={(e) => setFormData({...formData, courseName: e.target.value})}>
+                <label className="form-label small fw-semibold">Name of Course You Are Applying For</label>
+                <select className="form-select" value={formData.courseName} onChange={(e) => setFormData({...formData, courseName: e.target.value})}>
                   <option value="">-- Select Course --</option>
-                  <option value="Basic Medical Ultrasonography">Basic Medical Ultrasonography</option>
-                  <option value="Echocardiography (ECHO)">Echocardiography (ECHO)</option>
+                  <option value="Basic Medical Ultrasonography">One year Diploma in Medical Ultrasonography</option>
+                  <option value="Advancced Medical Ultrasonography">Two year Diploma in Medical Ultrasonography</option>
+                  <option value="Echocardiography (ECHO)">One Year Diploma in Echocardiography (ECHO)</option>
+                  <option value="Echocardiography (ECHO)">Two Year Diploma in Echocardiography (ECHO)</option> 
+                  <option value="Aesthetic Skin Care">Two year Diploma in Aesthetic Skin Care</option>
                   <option value="Vascular Doppler Ultrasound">Vascular Doppler Ultrasound</option>
-                  <option value="Obstetrics & Gynecology Ultrasound">Obstetrics & Gynecology Ultrasound</option>
+                  <option value="Physiotherapy">Two year Diploma in Physiotherapy</option>
                   <option value="Small Parts Ultrasound">Small Parts Ultrasound</option>
                   <option value="Advanced Color Doppler">Advanced Color Doppler</option>
-                  <option value="Aesthetic Skin Care">Aesthetic Skin Care</option>
                 </select>
               </div>
               <div className="col-md-6">
-                <label className="form-label small fw-semibold">Select Duration / Program *</label>
-                <select className="form-select" required value={formData.programType} onChange={(e) => setFormData({...formData, programType: e.target.value})}>
+                <label className="form-label small fw-semibold">Select Duration / Program</label>
+                <select className="form-select" value={formData.programType} onChange={(e) => setFormData({...formData, programType: e.target.value})}>
                   <option value="">-- Select Duration --</option>
-                  <option value="3-Months Diploma (crash programme)">3-Months Diploma (crash programme)</option>
-                  <option value="6-Months Diploma">6-Months Diploma</option>
+                  <option value="3-Months Diploma (crash programme)">3-Months Diploma (crash Course for 1 year Diploma)</option>
+                  <option value="6-Months Diploma">6-Months Diploma (6 Month Crash course for 2 year Diploma) </option>
                   <option value="12-Months Diploma">12-Months Diploma</option>
                   <option value="2-Years Master Diploma">2-Years Master Diploma</option>
                 </select>
               </div>
               <div className="col-12">
-                <label className="form-label small fw-semibold d-block">Preferred Class Timing *</label>
+                <label className="form-label small fw-semibold d-block">Preferred Class Timing</label>
                 <div className="d-flex flex-wrap gap-4 mt-1">
                   <div className="form-check">
                     <input className="form-check-input" type="radio" name="timingOptions" id="timeMorning" checked={formData.preferredTiming === 'Morning Batch'} onChange={() => setFormData({...formData, preferredTiming: 'Morning Batch'})} />
@@ -312,7 +361,6 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
               </div>
             </div>
 
-            {/* Educational Information Section */}
             <h6 className="fw-bold text-primary mb-3 text-uppercase">Educational Information</h6>
             <div className="table-responsive mb-4">
               <table className="table table-bordered align-middle small">
@@ -326,7 +374,6 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
                   </tr>
                 </thead>
                 <tbody>
-                  {/* Matric */}
                   <tr>
                     <td className="fw-semibold">Matric / O-Level</td>
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.matric.inst} onChange={(e) => handleEducationChange('matric', 'inst', e.target.value)} /></td>
@@ -334,7 +381,6 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.matric.marks} onChange={(e) => handleEducationChange('matric', 'marks', e.target.value)} /></td>
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.matric.grade} onChange={(e) => handleEducationChange('matric', 'grade', e.target.value)} /></td>
                   </tr>
-                  {/* Intermediate */}
                   <tr>
                     <td className="fw-semibold">Intermediate / A-Level</td>
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.intermediate.inst} onChange={(e) => handleEducationChange('intermediate', 'inst', e.target.value)} /></td>
@@ -342,7 +388,6 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.intermediate.marks} onChange={(e) => handleEducationChange('intermediate', 'marks', e.target.value)} /></td>
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.intermediate.grade} onChange={(e) => handleEducationChange('intermediate', 'grade', e.target.value)} /></td>
                   </tr>
-                  {/* Graduation */}
                   <tr>
                     <td className="fw-semibold">Graduation / Bachelor's</td>
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.graduation.inst} onChange={(e) => handleEducationChange('graduation', 'inst', e.target.value)} /></td>
@@ -350,7 +395,6 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.graduation.marks} onChange={(e) => handleEducationChange('graduation', 'marks', e.target.value)} /></td>
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.graduation.grade} onChange={(e) => handleEducationChange('graduation', 'grade', e.target.value)} /></td>
                   </tr>
-                  {/* Other */}
                   <tr>
                     <td className="fw-semibold">Other<br/><small className="text-muted">(Diploma/Certificate)</small></td>
                     <td><input type="text" className="form-control form-control-sm" value={formData.education.other.inst} onChange={(e) => handleEducationChange('other', 'inst', e.target.value)} /></td>
@@ -363,7 +407,7 @@ Other -> Inst: ${formData.education.other.inst || 'N/A'}, Year: ${formData.educa
             </div>
 
             <div className="form-check mb-4">
-              <input className="form-check-input" type="checkbox" required id="termsCheck" checked={formData.agreeTerms} onChange={(e) => setFormData({...formData, agreeTerms: e.target.checked})} />
+              <input className="form-check-input" type="checkbox" id="termsCheck" checked={formData.agreeTerms} onChange={(e) => setFormData({...formData, agreeTerms: e.target.checked})} />
               <label className="form-check-label small text-muted" htmlFor="termsCheck">
                 "I hereby acknowledge that I have read, understood, and agree to be bound by the Terms and Conditions."
               </label>
