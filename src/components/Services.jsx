@@ -189,7 +189,7 @@ export default function Services() {
           <span className="text-uppercase fw-bold text-primary small d-block mb-2">Academics & Healthcare</span>
           <h2 className="display-5 fw-bold text-dark">Courses Offered & Medical Services</h2><br />
           <h3 className="fw-bold text-dark mb-4  border-4 ps-3">
-            Collaboration with My Health Clinic
+            in Collaboration with My Health Clinic
           </h3>
           <p className="text-muted mx-auto mt-2" style={{ maxWidth: '650px' }}>
             Comprehensive training programs and diagnostic care managed by professional healthcare specialists.
